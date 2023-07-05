@@ -1,12 +1,11 @@
-const product1 = { price: 10, title: 'JS od podstaw' };
-const product2 = { price: '20', title: 'PHP od podstaw' };
-const discount = 10;
+const product1 = { price: 10, title: "JS od podstaw" }
+const product2 = { price: "20", title: "PHP od podstaw" }
+const discount = 0;
 
 //dodaj produkty do tabeli
 const itemsContainer = document.querySelector("#items");
 let counter = 1;
-
-function addItem(item){
+function addItem(item) {
   itemsContainer.innerHTML += `
   <tr>
   <td>${counter++}</td>
@@ -15,17 +14,27 @@ function addItem(item){
   <td>${item.price}</td>
   </tr>`;
 }
-addItem(product1);
-addItem(product2);
+
+addItem(product1)
+addItem(product2)
+
+// dodaj zniżkę
+const discountContainer = document.querySelector("#discount-amount")
+
+if (discount > 0) {
+  document.querySelector("#discount-amount").innerHTML = -discount
+  document.querySelector("#discount").classList.remove("hidden")
+}
+
 // String() , Number(), Boolean()
-if (isNaN(Number(product2.price))) {
+if (isNaN(+product2.price)) {
   console.log("Podano niepoprawny typ danych")
-} // Podano niepoprawny typ danych
+}
 
-const total = Number(product1.price) + Number(product2.price)
-const totalWithDiscount = total - 10
+const total = Number(product1.price) + Number(product2.price);
+const totalWithDiscount = total - discount;
 
-console.log(document.querySelector("#total-price"))
+document.querySelector("#total-price").innerHTML = totalWithDiscount;
 
 console.log(`
   Cena przed zniżką: ${total}
