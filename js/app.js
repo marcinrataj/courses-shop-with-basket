@@ -6,11 +6,9 @@ let discountEnabled = false
 const discountElement = document.querySelector("#discount")
 const discountCheckbox = document.querySelector("#add-discount")
 const discountContainer = document.querySelector("#discount-amount")
+const itemsContainer = document.querySelector("#items")
 
 //dodaj produkty do tabeli
-const itemsContainer = document.querySelector("#items")
-let counter = 1;
-
 function addItem(item) {
   itemsContainer.innerHTML += `
   <tr>
@@ -19,34 +17,57 @@ function addItem(item) {
   <td><input class="quantity" type="number" value="1"></td>
   <td>${item.price}</td>
   </tr>`
+
+  // pokazujemy dodawanie elementów innym sposobem, dużo brzydszy zapis, zajmuje dużo miejsca
+  const tr = document.createElement("tr")
+  const td1 = document.createElement("td")
+  const button = document.createElement("button")
+  button.innerText = "x"
+  button.classList = 'delete'
+  button.setAttribute("class", "delete")
+  td1.appendChild(button)
+
+  const td2 = document.createElement('td')
+  td2.innerText = item.title
+
+  const td3 = document.createElement('td');
+  const input = document.createElement('input')
+  input.setAttribute('type', 'number');
+  input.setAttribute('value', '1');
+  input.setAttribute('class', 'quantity');
+  td3.appendChild(input)
+
+  const td4 = document.createElement('td');
+  td4.innerText = item.price;
+
+  tr.appendChild(td1)
+  tr.appendChild(td2)
+  tr.appendChild(td3)
+  tr.appendChild(td4)
 }
 
 addItem(product1)
 addItem(product2)
 
-
-//usuwanie produktów
-const deleteButtons = document.querySelectorAll('.delete')
-for(let i = 0; i < deleteButtons.length; i++){
-  deleteButtons[i].addEventListener('click', removeRow)
+//usuwanie wierszy
+const quantityInputs = document.querySelectorAll(".quantity")
+for (let i = 0; i < quantityInputs.length; i++) {
+  quantityInputs[i].addEventListener("change", removeRowFromQuantity)
 }
-const quantityInputs = document.querySelectorAll('.quantity')
-for(let i = 0; i < quantityInputs.length; i++){
-  quantityInputs[i].addEventListener('change', removeRowFromQuantity)
+function removeRow(e) {
+  if (e.target.tagName === "BUTTON") {
+    const row = e.target.closest("tr")
+    row.remove()
+  }
 }
-function removeRow(e){
-  const row = e.target.closest('tr');
-  row.remove()
-}
-function removeRowFromQuantity(e){
-  console.log(e.target.value)
-  if(Number(e.target.value === "0")){
-    const row = e.target.closest('tr');
+function removeRowFromQuantity(e) {
+  if (Number(e.target.value === "0")) {
+    const row = e.target.closest("tr")
     row.remove()
   }
 }
 
-// dodaj zniżkę
+// dodaj zniżkę, jeśli element ma mniej niż 0 to schowaj zniżkę
 function addDiscount() {
   discountEnabled = !discountEnabled
   if (discount > 0) {
@@ -56,8 +77,7 @@ function addDiscount() {
   calculatePrice()
 }
 
-
-//cena całkowita
+//cena całkowita, dodanie cen obu produktów i pojawienie wyniku
 function calculatePrice() {
   let total = Number(product1.price) + Number(product2.price)
   //jesli jest true zastosuj zniżkę, inaczej cofnij ją
@@ -68,16 +88,15 @@ function calculatePrice() {
 }
 calculatePrice()
 
-//listenery
+//listenery, po kliknięciu wywołaj funkcję
 discountCheckbox.addEventListener("click", addDiscount)
+itemsContainer.addEventListener("click", removeRow)
 
 //zaznacz checkbox na początku jeśli trzeba, właściwość dataset 1-true 0-false, możemy zmieniac jak chcemy
-const discountShouldBeEnabled = Number(discountElement
-  .dataset
-  .discountShouldBeEnabled
-  )
+const discountShouldBeEnabled = Number(
+  discountElement.dataset.discountShouldBeEnabled
+)
 
 if (discountShouldBeEnabled) {
   discountCheckbox.click()
 }
-
