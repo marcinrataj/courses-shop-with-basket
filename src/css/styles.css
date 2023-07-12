@@ -80,6 +80,13 @@ input {
   background-color: #4f4f4f;
 }
 
+.in-cart {
+  background-color: #e8621f;
+}
+.in-cart:hover {
+  background-color: #ec6d2d;
+}
+
 .courses-list {
   display: flex;
   flex-wrap: wrap;
