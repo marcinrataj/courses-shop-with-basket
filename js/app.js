@@ -1,8 +1,13 @@
 //definicja elementów
 const coursesList = document.querySelector(".courses-list");
+const counter = document.querySelector(".counter");
 
 //lista produktów
 const items = [];
+
+const refreshProductsCount = () => {
+  counter.innerText = items.length;
+}
 
 const addToCart = (title, price, quantity = 1) => {
   console.log(title, price, quantity);
@@ -11,6 +16,7 @@ const addToCart = (title, price, quantity = 1) => {
     price: price,
     quantity: quantity,
   });
+  refreshProductsCount()
   console.log(items);
 };
 
