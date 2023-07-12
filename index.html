@@ -7,29 +7,53 @@
     <title>JS od podstaw</title>
   </head>
   <body>
-    <h2>Koszyk</h2>
-    <table class="card-table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Kurs</th>
-          <th>Ilość</th>
-          <th>Cena</th>
-        </tr>
-      </thead>
-      <tbody id="items"></tbody>
-      <tfoot class="discount">
-        <tr>
-          <td colspan="3" style="text-align: right"><b>Razem:</b></td>
-          <td><b id="total-price">0</b></td>
-        </tr>
-      </tfoot>
-    </table>
+    <div class="container">
+      <h2>Dostępne kursy:</h2>
+      <nav class="navigation">
+        <ul class="navigation-list">
+          <li class="navigation-item">
+            <a href="index.html">Sklep</a>
+          </li>
+        </ul>
+        <div class="cart">
+          <button class="button">
+            Koszyk
+            <span class="counter">0</span>
+          </button>
+        </div>
+      </nav>
 
-      <input type="checkbox" id="add-discount">
-      <label for="add-discount">Zastosuj zniżkę</label>
-    <p class="discount hidden" id="discount" data-discount-should-be-enabled="0">Zniżka: <b id="discount-amount">0</b>zł</p>
-    <script src="js/cart.js"></script>
+      <section class="courses-list">
+        <div class="box">
+          <img src="src/img/php.jpg" alt="Kurs PHP" />
+          <div class="box-body">
+            <p class="box-tittle">PHP od podstaw</p>
+            <p><b>Cena</b>: 99.02zł</p>
+            <button
+              class="button"
+              data-title="PHP od podstaw"
+              data-price="99.02"
+            >
+              Dodaj do koszyka
+            </button>
+          </div>
+        </div>
+        <div class="box">
+          <img src="src/img/js.jpg" alt="Kurs JS" />
+          <div class="box-body">
+            <p class="box-tittle">JS od podstaw</p>
+            <p><b>Cena</b>: 99.01zł</p>
+            <button
+              class="button"
+              data-title="JS od podstaw"
+              data-price="99.01"
+            >
+              Dodaj do koszyka
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
     <script src="js/app.js"></script>
   </body>
 </html>
