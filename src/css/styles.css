@@ -98,7 +98,6 @@ input {
   color: #fff;
   display: flex;
   justify-content: space-around;
-  padding: 10px 20px;
   align-items: center;
   padding: 10px;
 }
@@ -126,4 +125,10 @@ input {
   padding: 0 20px;
   max-width: 980px;
   margin: 0 auto;
+}
+.promotion{
+  background-color: #b7ebb7;
+  border: 2px dashed #30b930;
+  margin-bottom: 20px;
+  padding: 0 10px;
 }

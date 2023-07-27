@@ -7,21 +7,27 @@
     <title>JS od podstaw</title>
   </head>
   <body>
+    <nav class="navigation">
+      <ul class="navigation-list">
+        <li class="navigation-item">
+          <a href="index.html">Sklep</a>
+        </li>
+      </ul>
+      <div class="cart">
+        <a href="koszyk.html" class="button">
+          Koszyk
+          <span class="counter">0</span>
+        </a>
+      </div>
+    </nav>
+
     <div class="container">
       <h2>Dostępne kursy:</h2>
-      <nav class="navigation">
-        <ul class="navigation-list">
-          <li class="navigation-item">
-            <a href="index.html">Sklep</a>
-          </li>
-        </ul>
-        <div class="cart">
-          <button class="button">
-            Koszyk
-            <span class="counter">0</span>
-          </button>
-        </div>
-      </nav>
+
+      <div class="promotion">
+        <p>Promocja na wszystkie kursy jeszcze przez:</p>
+        <p id="promotion-counter">0h 12m 34s</p>
+      </div>
 
       <section class="courses-list">
         <div class="box">
@@ -33,6 +39,7 @@
               class="button"
               data-title="PHP od podstaw"
               data-price="99.02"
+              data-id="1"
             >
               Dodaj do koszyka
             </button>
@@ -47,6 +54,7 @@
               class="button"
               data-title="JS od podstaw"
               data-price="99.01"
+              data-id="2"
             >
               Dodaj do koszyka
             </button>
@@ -54,6 +62,8 @@
         </div>
       </section>
     </div>
-    <script src="js/app.js"></script>
+    <script src="src/js/home.js"></script>
+    <script src="src/js/app.js"></script>
+    <script src="src/js/counter.js"></script>
   </body>
 </html>

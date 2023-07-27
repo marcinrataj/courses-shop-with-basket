@@ -2,10 +2,10 @@
 (function () {
   const cart = {
     price: 0,
-    getPrice() {
-      this.price = 0;
-      this.items.forEach((item) => (this.price += item.price));
-      this.price -= this.getDiscountIfEnabled();
+    getPrice(callback) {
+      this.price = callback(this.items, this.getDiscountIfEnabled());
+      if(this.price < 0) this.price = 0
+      
       return this.price;
     },
     getDiscount() {
@@ -18,13 +18,19 @@
         return 0;
       }
     },
+    removeCourse(id) {
+      console.log(id);
+      const index = this.items.findIndex((item) => item.id === id);
+      this.items.splice(index, 1)
+      // usunięcie kursu z tablicy this.items
+    },
     discount: {
       amount: 10,
       enabled: false,
     },
     items: [
-      { price: 10, title: "JS od podstaw" },
-      { price: 20, title: "PHP od podstaw" },
+      { id: 1, price: 10, title: "JS od podstaw",},
+      { id: 2, price: 20, title: "PHP od podstaw",},
     ],
   };
 
@@ -32,7 +38,8 @@
   const discountElement = document.querySelector("#discount");
   const discountCheckbox = document.querySelector("#add-discount");
   const itemsContainer = document.querySelector("#items");
-
+//jeśli produkt z tablicy będzie miał mniejszą cene to idzie na górę
+  cart.items.sort((a, b) => a.price - b.price);
   for (const item of cart.items) {
     addItem(item);
   }
@@ -40,31 +47,31 @@
   //dodaj produkty do tabeli
   function addItem(item) {
     itemsContainer.innerHTML += `
-  <tr>
+  <tr data-course-id="${item.id}">
   <td><button class="delete">x</button></td>
   <td>${item.title}</td>
   <td><input class="quantity" type="number" value="1"></td>
   <td>${item.price}</td>
   </tr>`;
   }
-  // addItem(product1);
-  // addItem(product2);
-
   //usuwanie wierszy
-  const quantityInputs = document.querySelectorAll(".quantity");
-  for (let i = 0; i < quantityInputs.length; i++) {
-    quantityInputs[i].addEventListener("change", removeRowFromQuantity);
-  }
   function removeRow(e) {
     if (e.target.tagName === "BUTTON") {
       const row = e.target.closest("tr");
+      cart.removeCourse(Number(row.dataset.courseId));
       row.remove();
+      //odświeżaj przy każdym dodaniu, usunieciu 
+      calculatePrice()
     }
   }
   function removeRowFromQuantity(e) {
     if (Number(e.target.value === "0")) {
       const row = e.target.closest("tr");
+      //dataset przechodzi po ID i mam / wiemy które id usuwamy
+      cart.removeCourse(Number(row.dataset.courseId));
       row.remove();
+       //odświeżaj przy każdym dodaniu, usunieciu 
+       calculatePrice()
     }
   }
 
@@ -79,11 +86,31 @@
     calculatePrice();
   };
 
+  // 2 sposoby licznia ceny, 2 callbacki
+  // NORMALNY KLIENT NORMALNA ZNIŻKA
+  const getPriceRegularClient = (items, discount) => {
+    // let price = 0;
+    // items.forEach( item => price += item.price);
+    // price -= discount;
+    const price = items.reduce((acc, item) => (acc += item.price), -discount);
+    return price;
+  };
+  //VIP KLIENT, LEPSZA ZNIŻKA
+  const getPriceSuperClient = (items, discount) => {
+    let price = items.reduce((acc, item) => acc + item.price, 0);
+    price -= discount;
+    return price;
+  };
+
   //cena całkowita
-  function calculatePrice() {
-    let total = cart.getPrice();
+  const calculatePrice = () => {
+    const superClient = true;
+    let cb = getPriceRegularClient;
+    if (superClient) cb = getPriceSuperClient;
+
+    let total = cart.getPrice(cb);
     document.querySelector("#total-price").innerHTML = total;
-  }
+  };
   calculatePrice();
 
   //listenery, po kliknięciu wywołaj funkcję
