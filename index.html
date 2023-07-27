@@ -7,26 +7,63 @@
     <title>JS od podstaw</title>
   </head>
   <body>
-    <h2>Koszyk</h2>
-    <table class="card-table">
-      <thead>
-        <tr>
-          <th>Lp</th>
-          <th>Kurs</th>
-          <th>Ilość</th>
-          <th>Cena</th>
-        </tr>
-      </thead>
-      <tbody id="items"></tbody>
-      <tfoot class="discount">
-        <tr>
-          <td colspan="3" style="text-align: right"><b>Razem:</b></td>
-          <td><b id="total-price">0</b></td>
-        </tr>
-      </tfoot>
-    </table>
+    <nav class="navigation">
+      <ul class="navigation-list">
+        <li class="navigation-item">
+          <a href="index.html">Sklep</a>
+        </li>
+      </ul>
+      <div class="cart">
+        <a href="koszyk.html" class="button">
+          Koszyk
+          <span class="counter">0</span>
+        </a>
+      </div>
+    </nav>
 
-    <p class="discount" id="discount" >Zniżka: <b id="discount-amount">0</b>zł</p>
-    <script src="js/app.js"></script>
+    <div class="container">
+      <h2>Dostępne kursy:</h2>
+
+      <div class="promotion">
+        <p>Promocja na wszystkie kursy jeszcze przez:</p>
+        <p id="promotion-counter">0h 12m 34s</p>
+      </div>
+
+      <section class="courses-list">
+        <div class="box">
+          <img src="src/img/php.jpg" alt="Kurs PHP" />
+          <div class="box-body">
+            <p class="box-tittle">PHP od podstaw</p>
+            <p><b>Cena</b>: 99.02zł</p>
+            <button
+              class="button"
+              data-title="PHP od podstaw"
+              data-price="99.02"
+              data-id="1"
+            >
+              Dodaj do koszyka
+            </button>
+          </div>
+        </div>
+        <div class="box">
+          <img src="src/img/js.jpg" alt="Kurs JS" />
+          <div class="box-body">
+            <p class="box-tittle">JS od podstaw</p>
+            <p><b>Cena</b>: 99.01zł</p>
+            <button
+              class="button"
+              data-title="JS od podstaw"
+              data-price="99.01"
+              data-id="2"
+            >
+              Dodaj do koszyka
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="src/js/home.js"></script>
+    <script src="src/js/app.js"></script>
+    <script src="src/js/counter.js"></script>
   </body>
 </html>
