@@ -102,17 +102,17 @@ input {
   padding: 10px;
 }
 
-.navigation-list{
+.navigation-list {
   list-style-type: none;
   padding: 0;
 }
 
-.navigation-list a{
+.navigation-list a {
   color: #fff;
-  text-decoration: none
+  text-decoration: none;
 }
 
-.counter{
+.counter {
   background-color: #fff;
   color: #000;
   border-radius: 6px;
@@ -121,14 +121,39 @@ input {
   padding: 2px 4px 1px 4px;
 }
 
-.container{
+.container {
   padding: 0 20px;
   max-width: 980px;
   margin: 0 auto;
 }
-.promotion{
+.promotion {
   background-color: #b7ebb7;
   border: 2px dashed #30b930;
   margin-bottom: 20px;
   padding: 0 10px;
+}
+
+.form-item {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #e2e2e2;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+@media (min-width: 800px) {
+  .summary {
+    display: flex;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+  }
 }

@@ -1,5 +1,6 @@
 (() => {
-const endTime = '2024-01-01T14:54:00Z';
+  const now = new Date();
+const endTime = now.getTime()
 const counter = document.querySelector('#promotion-counter');
 
 const getSecondUntilDate = (date) =>{
@@ -20,7 +21,7 @@ const getTimerFormat = seconds => {
   return `${h} godz. ${m} min. ${s} s`
 }
 
-const s = getSecondUntilDate(endTime)
+const s = getSecondUntilDate(endTime) + 12
 
 counter.innerHTML = getTimerFormat(s);
 // obliczyc ilość sekund od 0 do czassu docelowego

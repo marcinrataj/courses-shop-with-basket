@@ -1,3 +1,4 @@
+
 //IIFE
 (function () {
   const cart = {
@@ -23,16 +24,19 @@
       const index = this.items.findIndex((item) => item.id === id);
       this.items.splice(index, 1)
       // usunięcie kursu z tablicy this.items
+
+      localStorage.setItem('items', JSON.stringify(this.items))
     },
     discount: {
       amount: 10,
       enabled: false,
     },
     items: [
-      { id: 1, price: 10, title: "JS od podstaw",},
-      { id: 2, price: 20, title: "PHP od podstaw",},
+
     ],
   };
+  //wczytaj dane
+  cart.items = JSON.parse(localStorage.getItem('items'))
 
   //definicja elementów
   const discountElement = document.querySelector("#discount");
@@ -125,4 +129,13 @@
   if (discountShouldBeEnabled) {
     discountCheckbox.click();
   }
+
+  //zapisz cenę całkowitą do pamięci
+  const savePriceToStore = () => {
+    localStorage.setItem('totalPrice', cart.price) // aktualna ostatnia cena
+  }
+  const nextButton = document.querySelector('#go-to-summary');
+  nextButton.addEventListener('click', savePriceToStore)
+
 })();
+

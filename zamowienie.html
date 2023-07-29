@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <title>JS od podstaw</title>
+  </head>
+  <body>
+    <nav class="navigation">
+      <ul class="navigation-list">
+        <li class="navigation-item">
+          <a href="index.html">Sklep</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <h2>Finalizacja zamówienia</h2>
+
+      <div class="summary">
+        <form class="card">
+          <h3>Dane:</h3>
+          <div class="form-item">
+            <label for="name">Imię i Nazwisko</label>
+            <input type="text" id="name" name="name" />
+          </div>
+
+          <div class="form-item">
+            <label for="email">E-mail</label>
+            <input type="text" id="email" name="email" />
+          </div>
+
+          <div class="form-item">
+            <label for="tel">Powtórz E-mail</label>
+            <input type="text" id="email-confirm" name="email-confirm" />
+          </div>
+
+          <div class="form-item">
+            <label for="email-confirm">Telefon</label>
+            <input type="text" id="tel" name="tel" />
+          </div>
+
+          <h3>Płatność:</h3>
+          <div>
+            <label for="email-confirm"
+              >Online
+              <input type="radio" name="payment" checked value="online" />
+            </label>
+            <br />
+            <label for="email-confirm"
+              >Blik
+              <input type="radio" name="payment" value="blik" />
+            </label>
+          </div>
+        </form>
+
+        <div class="card">
+          <h3>Podsumowanie:</h3>
+          <ul id="items-list">
+          </ul>
+          <hr />
+          <p><b>Cena</b>: <span id="total-price"></span>zł</p>
+          <p><b>Data zamowienia</b>: <span id="date"></span></p>
+        </div>
+      </div>
+
+      <div style="float: right; margin-top: 20px; margin-bottom: 30px;">
+        <a href="koszyk.html" class="button">Wróć</a>
+        <a href="#" class="button" id="buy">Kupuję</a>
+      </div>
+    </div>
+    <script src="src/js/app.js"></script>
+  </body>
+</html>
